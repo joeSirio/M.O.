@@ -1,0 +1,534 @@
+* {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color:#333;
+}
+
+:root{
+
+  /* COLORS */
+  --main-font-color: rgb(73,68,59);
+  --main-font-error-color: rgb(191,46,37);
+  --main-color-white: rgb(254, 254, 240);
+  --main-color-green: rgb(51,110,36);
+  --main-color-gray: rgb(28,28,28);
+  --main-color-orange: rgb(230, 152,54);
+  --secondary-color-orange: rgb(240,194,118);
+  --secondary-color-gray: rgb(100,95,87);
+}
+
+body{
+  background:var(--main-color-white);
+}
+
+.navbar {
+  padding:20px;
+  display:flex;
+  align-items:center;
+  max-width:600px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--main-color-gray);
+}
+
+.navbar h1{
+  color: var(--main-color-orange);
+}
+.navbar .links{
+  margin-left: auto;
+}
+.navbar a{
+  margin-left:16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover{
+  color: var(--main-color-orange);
+}
+.content{
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+
+/* HABIT */
+.home{
+  position:relative;
+}
+.swal-fill-wrapper{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.swal-fill-wrapper input{
+  margin:0;
+  width:150px;
+  box-shadow: none;
+  border:none;
+}
+
+.addHabitBtn{
+  background-color: var(--main-color-green);
+  border-radius:25px;
+  border:1px solid var(--main-color-white);
+  cursor:pointer;
+  position:absolute;
+  width: 50px;
+  height:50px;
+  right:0;
+  top:0;
+  font-size:40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addHabitBtn span{
+  color:var(--main-color-white);
+  margin-top:-5px;
+}
+.addHabitBtn:hover{
+  border-color: var(--main-color-green);
+}
+.habitWrapper{
+  margin-bottom:20px;
+  margin-top:10px;
+  user-select: none;
+  position:relative;
+  width:100%;
+}
+.habitItem{
+  margin-top:15px;
+  border: 1px solid var(--main-color-orange);
+  color: var(--main-font-color);
+  cursor:pointer;
+  border-radius:40px;
+  position: relative;
+  overflow:hidden;
+  height:80px;
+}
+
+
+.habitItem .task-content{
+  height:80px;
+  display: flex;
+  align-items: center;
+  padding-left:100px;
+  padding-right:80px;
+  background:var(--main-color-orange);
+  position:relative;
+  font-size:24px;
+  font-weight:600;
+}
+
+.habitItem .task-content .habit-desc{
+  font-size:14px;
+  font-weight: normal;
+  margin-top:10px;
+}
+
+.habitItem.completed{
+  animation: habit-completed .5s linear;
+  animation-fill-mode: forwards;
+  border:1px solid var(--main-color-gray);
+}
+.habitItem.completed .task-content{
+  background:var(--secondary-color-gray);
+  color:var(--main-color-white);
+}
+.habitItem.completed .habit-info, .habitItem.completed .habit-desc{
+  color:var(--main-color-white);
+}
+.habitItem.completed .habitCheckmarkWrapper{
+  background-color: var(--main-color-orange);
+  border-color: var(--main-color-orange);
+}
+.habitItem.completed .expanded-content{
+  background:rgb(100,95,87, 0.5)
+}
+.habitItem.incomplete{
+  animation: habit-reverted .25s linear;
+  animation-fill-mode: forwards;
+}
+.habitItem:hover{
+  border:1px solid var(--secondary-color-orange);
+} 
+
+.habit-edit-frequency-wrapper{
+  position: relative;
+}
+
+.habit-edit-title{
+  padding-top:20px;
+}
+
+.habit-edit-freq-type{
+  display:flex;
+  position:absolute;
+  top:20px;
+  right:0;
+}
+
+.habitItem.expand{
+  animation: expand .5s linear;
+  animation-fill-mode: forwards;
+}
+.habitItem.collapse{
+  animation: expand .5s reverse;
+  animation-fill-mode:forwards;
+}
+
+.expanded-content{
+  background: var(--secondary-color-orange);
+  color: var(--main-font-color);
+  height:calc(100% - 80px);
+  display:flex;
+  flex-direction: column;
+  position: relative;
+  padding:0px 30px 10px 10px;
+}
+
+.expanded-content input{
+  width:100%;
+  border:none;
+  padding:10px;
+  padding-right:0;
+  border-radius:5px;
+  margin-top:10px;
+}
+
+.habit-edit-freq-type-option{
+  background: var(--main-color-white);
+  border:1px solid var(--main-color-white);
+  padding:5px;
+  cursor: pointer;
+}
+
+.habit-edit-freq-type-option:hover{
+  border-color: var(--main-color-orange);
+  border-radius:5px;
+}
+
+.habit-edit-freq-type-option.selected{
+  background:var(--main-color-orange);
+  border:1px solid var(--main-color-orange);
+  color:var(--main-color-white);
+  border-radius:5px;
+}
+
+.habit-edit-freq-daily-selector{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:30px 40px 10px;
+}
+
+.habit-edit-day-selector{
+  font-weight:600;
+  background:var(--main-color-white);
+  border:1px solid var(--main-color-orange);
+  color:var(--main-color-orange);
+  border-radius:25px;
+  width:50px;
+  height:50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 5px;
+}
+
+.habit-edit-day-selector:hover{
+  border-color: var(--main-color-white);
+}
+
+.habit-edit-day-selector.selected:hover{
+  border-color: var(--main-color-orange);
+}
+
+.habit-edit-day-selector.selected{
+  background:var(--main-color-orange);
+  border:1px solid var(--main-color-white);
+  color:var(--main-color-white);
+
+}
+
+.expanded-controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding:10px;
+}
+
+.expanded-controls .save-btn{
+  background:var(--main-color-green);
+  border:1px solid var(--main-color-green);
+  color:var(--main-color-white);
+  padding:5px 50px;
+  border-radius:25px;
+  font-size:16px
+}
+
+.expanded-controls .delete-btn{
+  position: absolute;
+  bottom: -5px;
+  right:-15px;
+  border:none;
+  background:none;
+  color: var(--main-font-error-color);
+  font-weight: bold;
+  cursor:pointer;
+}
+
+.side-arrow{
+  position: absolute;
+  top:0;
+  right:0px;
+  width:50px;
+  height:50px;
+  padding:15px;
+  cursor:pointer;
+}
+
+.side-arrow.expanded:after{
+  transform:rotate(45deg);
+}
+
+.side-arrow:hover{
+  cursor:cell;
+}
+
+.side-arrow::after{
+  content:"";
+  left:15px;
+  top:calc(50% - 12.5px);
+  width:25px;
+  height:25px;
+  border-bottom:3px solid var(--main-color-white);
+  border-right:3px solid var(--main-color-white);
+  position: absolute;
+  transform:rotate(-45deg);
+}
+
+.habitCheckmarkWrapper{
+  position: absolute;
+  margin-right:20px;
+  border-radius:100%;
+  border:2px solid #e9eab1;
+  width:60px;
+  height:60px;
+  left:10px;
+  top:8px;
+}
+.habitCheckmarkWrapper .checkmark:after{
+  content:"";
+  width:15px;
+  height:30px;
+  border-bottom:3px solid #e9eab1;
+  border-right:3px solid #e9eab1;
+  position: absolute;
+  left:20px;
+  top:10px;
+  transform:rotate(45deg);
+}
+
+/* 
+.expanded{
+  display:flex;
+  flex-direction: row;
+  position:absolute;
+  top:75px;
+}
+.expanded-edit{
+  display:flex;
+  flex-direction: column;
+  flex:2;
+}
+.expanded-controls{
+  flex:.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+/* 
+.habitCheckmarkWrapper, .habitMinusWrapper{
+  position:absolute;
+  top:calc(50% - 25px);
+  left:15px;
+  width:50px;
+  height:50px;
+}
+
+.habitMinusWrapper{
+  border-radius:100%;
+  background:#e9eab1;
+  cursor:w-resize;
+}
+
+.weeklyHabitWrapper{
+  margin-top:10px;
+  user-select: none;
+  position:relative;
+  width:100%;
+}
+.weeklyHabitItem{
+  display:flex;
+  margin-top:15px;
+  padding:15px;
+  border: 1px solid #333;
+  border-radius:100px;
+  color:#e9eab1;
+  cursor:pointer;
+  position: relative;
+}
+.weeklyHabitItem:hover{
+  border:1px solid #294132;
+}
+.weeklyHabitAmount{
+  position:absolute;
+  right:-50px;
+  top:15px;
+  color:#294132;
+} */
+/* .habitMinusWrapper{
+  width:20px;
+  height:20px;
+  border-radius:100%;
+  background:#e9eab1;
+  cursor:w-resize;
+} */
+/* .habitMinusWrapper:hover{
+  background:#d47215;
+}
+.minus{
+  padding-left:6px;
+}
+
+.habit-desc{
+  break-after:always;
+} */
+
+/* Add Habit Popup */
+.overlay{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.popup-wrapper{
+  --popup-height-halved: 175px;
+  --popup-width-halved: 400px;
+  height:calc(var(--popup-height-halved) * 2);
+  width: calc(var(--popup-width-halved) * 2);
+  position:fixed;
+  top:calc(50% - var(--popup-height-halved));
+  left:calc(50% - var(--popup-width-halved));
+  background:var(--main-color-white);
+  border:2px solid var(--main-color-orange);
+  border-radius:25px;
+  padding:50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-wrapper h2{
+  margin: 20px 0;
+}
+
+.popup-wrapper .add-habit-input-wrapper{
+  width:100%;
+}
+
+.popup-wrapper input, .popup-wrapper select, .popup-wrapper textarea{
+  margin: 10px 0;
+  padding:5px 10px;
+  background: var(--main-color-white);
+  border:1px solid var(--secondary-color-orange);
+  border-radius:5px;
+  height:28px;
+}
+.popup-wrapper .add-habit-input-wrapper > input, .popup-wrapper .add-habit-input-wrapper > textarea{
+  width:50%;
+}
+
+.popup-wrapper select{
+  width:20%;
+  height:40px;
+}
+
+.popup-wrapper .add-habit-input-wrapper .add-habit-freq-custom{
+  margin-left:25px;
+  width:20%;
+}
+
+.popup-wrapper .add-habit-color-input{
+  margin-left:25px;
+  padding:2px 10px; 
+}
+
+.popup-wrapper input{
+  width:100%;
+}
+
+.add-habit-input-wrapper{
+  text-align: center;
+}
+
+.popup-wrapper .submit-btn-wrapper button{
+  padding:10px 25px;
+  background:var(--main-color-green);
+  color:var(--main-color-white);
+  border:none;
+  border-radius:5px;
+  margin-top:10px;
+
+}
+
+/* Keyframes */
+@keyframes habit-completed{
+  50%{
+    background-position:left;
+    transform:scale(100%);
+    margin-left:0px;
+  }
+  75%{
+
+    transform:scale(110%);
+    margin-left:50px;
+  }
+  100%{
+    transform:scale(100%);
+    background-position:left
+  }
+}
+@keyframes habit-reverted{
+  0%{
+    background-position: left;
+  }
+  100%{
+    background-position:right;
+  }
+}
+@keyframes expand{
+  0%{
+    border-radius:40px;
+    height:80px;
+  }
+  100%{
+    border-radius:5px;
+    height:450px;
+  }
+}
+
+
+
+
+
+
