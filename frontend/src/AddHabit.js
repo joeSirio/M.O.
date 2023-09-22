@@ -105,31 +105,6 @@ const AddHabit = (props) => {
                     <button className='save-btn' onClick={() => handleSubmit()}>Save</button>
                 </div>
             </div>
-                {/* <h2>Add A New Habit</h2>
-                <div className='add-habit-input-wrapper'>
-                    <input type="text" placeholder="Go For A Walk" id="input-name" className="add-habit-input" />
-                    <br/>
-                    <textarea placeholder="Walk for 30 minutes" id="input-description" className="add-habit-input"></textarea>
-                    <div className="swal-fill-wrapper"> Fill Color:  
-                        <input type="color" id="input-color" className="add-habit-input add-habit-color-input" />
-                    </div>
-                    <select name="frequency" id="input-frequency" onChange={showCustom} > 
-                        <option value="0">Every Day</option> 
-                        <option value="1">Once A Week</option> 
-                        <option value="2">2 Times A Week</option> 
-                        <option value="3">3 Times a Week</option> 
-                        <option value="4">4 Times a Week</option> 
-                        <option value="5">5 Times a Week</option> 
-                        <option value="-1"> Custom </option> 
-                    </select>
-                    {showingCustom &&
-                        <input type="number" id="input-frequency-custom" className="add-habit-input add-habit-freq-custom" min="1" />
-                    }
-                </div>
-
-                <div className='submit-btn-wrapper'>
-                    <button type='submit' onClick={handleSubmit}>Add Habit</button>
-                </div> */}
         </div>
     )
 }
