@@ -1,13 +1,15 @@
 export class APIService {
     static myInstance = null;
 
+    static url = 'http://54.89.100.29:8000'
+
     static getInstance(){
         return new APIService();
     }
     
     async GetData() {
         try{
-            let response = await fetch('http://localhost:8000/data')
+            let response = await fetch(url + '/data')
             return await response.json();
         }
         catch(error){
@@ -17,7 +19,7 @@ export class APIService {
 
     async AddHabit(data) {
         try{
-            await fetch('http://localhost:8000/data',{
+            await fetch(url + 'data',{
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -38,7 +40,7 @@ export class APIService {
 
     async UpdateHabit(data) {
         try{
-            await fetch('http://localhost:8000/data',{
+            await fetch(url + '/data',{
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json'
@@ -59,7 +61,7 @@ export class APIService {
 
     async DeleteHabit(id){
         try{
-            await(fetch(`http://localhost:8000/data/${id}`,{
+            await(fetch(url + `/data/${id}`,{
                 method: 'DELETE'
             })
             .then((response) => {
