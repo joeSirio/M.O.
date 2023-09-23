@@ -44,7 +44,6 @@ export class APIService {
     async GetData() {
         try{
             // let response = await fetch(url + '/data')
-            console.log(this.data);
             return await this.data;
         }
         catch(error){
@@ -54,6 +53,7 @@ export class APIService {
 
     async AddHabit(data) {
         try{
+            data["task"] = data["name"];
             data["id"] = this.data.length + 1;
             this.data.push(data);
             // await fetch(url + 'data',{

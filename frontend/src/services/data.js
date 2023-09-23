@@ -3,8 +3,7 @@ import { FrequencyType } from "../enums/FrequencyType.tsx";
 
 
 const dbData = () => {
-
-    return([
+    const data = [
         {
             id: 1,
             task: "Go for a walk",
@@ -36,7 +35,10 @@ const dbData = () => {
             occurance: "1|2|3|4|5",
         }
     ]
-    )
+    
+    const getData = () => {
+        return this.data
+    }
 }
 
 export default dbData;

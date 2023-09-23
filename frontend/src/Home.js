@@ -4,50 +4,17 @@ import {useEffect, useState} from 'react';
 import AddHabit from './AddHabit';
 import HabitItem from './HabitItem';
 import APIService from './services/APIService';
-import { FrequencyType } from "./enums/FrequencyType.tsx";
+import dbData from './services/data';
 
-const Home = () => {
+const Home = (props) => {
     const [habits, setHabit] = useState([]);
     const [showAddHabit, setShowAddHabit] = useState(false);
 
-    const dbData = [
-        {
-            id: 1,
-            task: "Go for a walk",
-            description: "for atleast 30 minutes",
-            type: FrequencyType.Daily,
-            target:1,
-            amount:0,
-            status: false,
-            occurance: "0|1|2|3|4|5|6",
-        },
-        {
-            id: 2,
-            task: "Workout",
-            description: "for 1 hour",
-            type: FrequencyType.Daily,
-            target:1,
-            amount:0,
-            status: false,
-            occurance: "1|2|3|4",
-        },
-        {
-            id: 3,
-            task: "Leetcode",
-            description: "for 1 hour",
-            type: FrequencyType.Daily,
-            target:1,
-            amount:0,
-            status: false,
-            occurance: "1|2|3|4|5",
-        }
-    ];
-
     const getAllData = () => {
-        // APIService.getInstance().GetData().then((results) => {
-        //     setHabit([]);
-        console.log(dbData);
-            dbData.map((result) => {
+        
+        props.apiService.GetData().then((results) => {
+            setHabit([]);
+            results.map((result) => {
 
                 let habit = {
                     name: result.task,
@@ -62,7 +29,7 @@ const Home = () => {
                 setHabit(habits => [...habits, habit]);
                 return true;
             })
-        // })
+        })
     }
 
     useEffect(() => {
@@ -82,28 +49,24 @@ const Home = () => {
     }
 
     const handleAddHabit = (data) => {
-        data["id"] = dbData.length + 1;
-        dbData.push(data);
-
-        getAllData();
-        closePopup();
-
-        // APIService.getInstance().AddHabit(data)
-        //     .then(() =>  {
-        //         getAllData();
-        //         closePopup();
-        // });
+        console.log(data);
+        props.apiService.AddHabit(data)
+            .then(() =>  {
+                getAllData();
+                closePopup();
+        });
     }
 
     const  handleUpdateHabit = (data) => {
-        APIService.getInstance().UpdateHabit(data)
+        console.log(data);
+        props.apiService.UpdateHabit(data)
             .then(() =>  {
                 getAllData();
         });
     }
 
     const handleDeleteHabit = (id) => {
-        APIService.getInstance().DeleteHabit(id)
+        props.apiService.DeleteHabit(id)
             .then(() =>  {
                 getAllData();
                 closePopup();
@@ -151,6 +114,7 @@ const Home = () => {
         newHabit[index].type = habit.FrequencyType;
         newHabit[index].occurance = habit.occurance;
         setHabit(newHabit);
+        console.log(newHabit)
     }
 
     return ( 
