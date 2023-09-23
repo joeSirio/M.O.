@@ -1,12 +1,8 @@
 # M.O.
 
-Built a single page application using react.js with python fast api for daily task management.
-
-https://github.com/joeSirio/M.O./assets/44539191/18e3af6d-348d-4af6-915f-21756dfaf819
+This branch is a simple deployment of M.O. using github pages and only contains the React code and is a fresh instance on each visit.
 
 
+To use the full application with persistent data, use the main branch which utilizes Python FastAPI and PostgreSQL.
 
-## Goal
-
-Creating a task tracker/manager that is more effective for me than what is currently available.
 
