@@ -54,7 +54,7 @@ export class APIService {
     async AddHabit(data) {
         try{
             data["task"] = data["name"];
-            data["id"] = this.data.length + 1;
+            data["id"] = this.data[this.data.length - 1]["id"] + 1;
             this.data.push(data);
             // await fetch(url + 'data',{
             //     method: 'POST',
@@ -76,6 +76,9 @@ export class APIService {
     }
 
     async UpdateHabit(data) {
+        data["task"] = data["name"]
+        let index = this.data.findIndex(item => item.id === data["id"])
+        this.data[index] = data
         // try{
         //     await fetch(url + '/data',{
         //         method: 'PUT',
@@ -97,6 +100,10 @@ export class APIService {
     }
 
     async DeleteHabit(id){
+        this.data.splice(this.data.findIndex(item => item.id === id), 1)
+        let habit = this.data.find(x => x.id === id)
+        this.data.splice()
+
         // try{
         //     await(fetch(url + `/data/${id}`,{
         //         method: 'DELETE'
